@@ -1,0 +1,15 @@
+li{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: .5rem;
+}
+.done{
+    text-decoration: line-through;
+}
+.bk{
+    cursor: not-allowed;
+}

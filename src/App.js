@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from 'react'
+import Context from './Context'
+import TodoList from './Todo/TodoList'
 
 function App() {
+const[todos,setTodos]=useState([
+  {id:1,complited:false,title:'Купит хлеб'},
+  {id:2,complited:false,title:'Купит масло'},
+  {id:3,complited:false,title:'Купит молоко'}
+  
+  ]);
+
+
+
+  function toogleTodo(id){
+    setTodos(
+      todos.map(todo=>{
+        if(todo.id===id){
+          todo.complited=!todo.complited
+        }
+        return todo
+      }
+      )
+    )
+  }
+  function removeTodo(id){
+    setTodos(
+      todos.filter(todo=>todo.id!==id)
+    )
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Context.Provider value={{toogleTodo,removeTodo}}>
+    <div className='wrapper'>
+      <h1>React tutorial</h1>
+      <TodoList todos={todos}/>
     </div>
+    </Context.Provider>
   );
 }
 
