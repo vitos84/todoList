@@ -1,10 +1,11 @@
 import React,{useState} from 'react'
 import Context from './Context'
 import TodoList from './Todo/TodoList'
+import AddTodo from './Todo/AddTodo'
 
 function App() {
 const[todos,setTodos]=useState([
-  {id:1,complited:false,title:'Купит хлеб'},
+  {id:1,complited:true,title:'Купит хлеб'},
   {id:2,complited:false,title:'Купит масло'},
   {id:3,complited:false,title:'Купит молоко'}
   
@@ -28,11 +29,18 @@ const[todos,setTodos]=useState([
       todos.filter(todo=>todo.id!==id)
     )
   }
+  function adTodo(title){
+    setTodos(todos.concat([{
+      title,
+      id:Date.now(),
+      complited:false
+    }]))}
   return (
     <Context.Provider value={{toogleTodo,removeTodo}}>
     <div className='wrapper'>
       <h1>React tutorial</h1>
-      <TodoList todos={todos}/>
+      <AddTodo onCreate={adTodo}/>
+      {todos.length ?<TodoList todos={todos}/>:<p>no todos</p>}
     </div>
     </Context.Provider>
   );
